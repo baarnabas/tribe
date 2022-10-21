@@ -7,17 +7,18 @@ import (
 	"net/http"
 )
 
-func Healthz(w http.ResponseWriter, r *http.Request) {
+func healthz(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
 
 	_, err := io.WriteString(w, `{"alive": true}`)
 	if err != nil {
 		log.Err(err).Stack().Msg("IO error")
 		return
 	}
-	log.Info().Msg("Health is OK")
+	log.Info().Msg("Health is OK status")
 }
 
 func Init(router *mux.Router) {
-	router.HandleFunc("/healthz", Healthz).Methods("GET")
+	router.HandleFunc("/healthz", healthz).Methods("GET")
 }
