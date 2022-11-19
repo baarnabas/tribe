@@ -16,7 +16,7 @@ func healthz(w http.ResponseWriter, _ *http.Request) {
 		log.Err(err).Stack().Msg("IO error")
 		return
 	}
-	log.Info().Msg("Health is OK status")
+	log.Info().Msg("Health is OK")
 }
 
 func Init(router *mux.Router) {
