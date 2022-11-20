@@ -1,10 +1,11 @@
-package healthz
+package vaultapi
 
 import (
 	"github.com/gorilla/mux"
 	"github.com/rs/zerolog/log"
 	"io"
 	"net/http"
+	"tribe/api/utils"
 )
 
 func healthz(w http.ResponseWriter, _ *http.Request) {
@@ -19,6 +20,7 @@ func healthz(w http.ResponseWriter, _ *http.Request) {
 	log.Info().Msg("Health is OK")
 }
 
-func Init(router *mux.Router) {
+func Healthz(router *mux.Router) {
 	router.HandleFunc("/healthz", healthz).Methods("GET")
+	utils.ParseEndpoints(router, "/healthz")
 }
